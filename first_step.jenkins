@@ -1,14 +1,15 @@
 #!groovy
 // Check ub1 properties
-properties([disableConcurrentBuilds()])
+properties([disableConcurrentBuilds()]) //disable simultaneous builds
 
 pipeline {
     agent { 
         label 'master'
         }
     options {
-        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
-        timestamps()
+        // save logs last 10 builds, and save artifacts last 10 builds
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10')) 
+        timestamps() //view timestamp on UI
     }
     stages {
         stage("First step") {
